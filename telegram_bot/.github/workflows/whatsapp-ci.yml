@@ -1,0 +1,32 @@
+name: WhatsApp Bot CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.9
+
+    - name: Install Dependencies
+      run: |
+        cd whatsapp_bot
+        pip install -r requirements.txt
+
+    - name: Build Docker Image
+      run: |
+        cd whatsapp_bot
+        docker build -t whatsapp-bot:latest .
+
+    - name: Run Tests (if any)
+      run: echo "No tests for now"  # Add test commands if available
