@@ -1,5 +1,9 @@
-# Base image
+# Gunakan image Python resmi sebagai base
 FROM python:3.9-slim
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # Set working directory
 WORKDIR /app
@@ -7,8 +11,17 @@ WORKDIR /app
 # Copy requirements and bot code
 COPY bot.py /app/bot.py
 
-# Install dependencies
-RUN pip install python-telegram-bot
+# Salin file requirements.txt terlebih dahulu untuk memanfaatkan layer cache Docker
+COPY requirements.txt .
 
-# Command to run the bot
+# Install dependensi Python
+RUN pip install python-telegram-bot
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Salin semua file dari direktori lokal ke dalam container
+COPY . .
+
+# Jalankan bot.py saat container berjalan
 CMD ["python", "bot.py"]
+
