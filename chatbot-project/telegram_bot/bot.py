@@ -9,7 +9,7 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Token Telegram Bot dari BotFather
-TOKEN = "7698017188:AAHtXw-so8rjBEJ4NmZqAYMhqQZ86SfGJRA"
+TOKEN = "your-token"
 
 # Fungsi untuk perintah /start
 async def start(update: Update, context):
