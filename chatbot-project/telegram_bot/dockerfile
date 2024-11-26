@@ -8,9 +8,6 @@ ENV PYTHONUNBUFFERED=1
 # Set working directory
 WORKDIR /app
 
-# Copy requirements and bot code
-COPY bot.py /app/bot.py
-
 # Salin file requirements.txt terlebih dahulu untuk memanfaatkan layer cache Docker
 COPY requirements.txt .
 
